@@ -1,25 +1,211 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Privacy Policy</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Privacy Policy for ScanMaster, a QR code and barcode scanning and generation app.">
+    <meta name="theme-color" content="#f7f8f4">
+    <title>Privacy Policy - ScanMaster</title>
     <style>
-        /*  CSS  */
+        :root {
+            color-scheme: light;
+            --ink: #18241f;
+            --muted: #65716b;
+            --paper: #f7f8f4;
+            --surface: #fff;
+            --line: #e7eae3;
+            --green: #356c4c;
+            --green-dark: #28563b;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            background: var(--paper);
+            color: var(--ink);
+            font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a { color: var(--green); text-underline-offset: 3px; }
+        a:hover { color: var(--green-dark); }
+
+        .page {
+            width: min(800px, calc(100% - 40px));
+            margin: 54px auto;
+        }
+
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--ink);
+            font-size: 14px;
+            font-weight: 750;
+            letter-spacing: -.03em;
+            text-decoration: none;
+        }
+
+        .brand-mark {
+            display: grid;
+            width: 32px;
+            height: 32px;
+            place-items: center;
+            border-radius: 11px;
+            background: var(--green);
+            color: white;
+        }
+
+        .brand-mark svg { width: 20px; height: 20px; }
+
+        main {
+            margin-top: 28px;
+            padding: clamp(26px, 6vw, 54px);
+            border: 1px solid var(--line);
+            border-radius: 24px;
+            background: var(--surface);
+            box-shadow: 0 18px 55px rgba(36, 54, 41, .06);
+        }
+
+        .eyebrow {
+            margin: 0 0 12px;
+            color: var(--green);
+            font-size: 11px;
+            font-weight: 750;
+            letter-spacing: .13em;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: clamp(34px, 7vw, 48px);
+            letter-spacing: -.06em;
+            line-height: 1.1;
+        }
+
+        .updated {
+            margin: 14px 0 27px;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .intro {
+            padding: 19px 21px;
+            border: 1px solid #dce8d9;
+            border-radius: 15px;
+            background: #f3f7ef;
+            color: #34493a;
+            font-size: 14px;
+            line-height: 1.75;
+        }
+
+        h2 {
+            margin: 32px 0 9px;
+            font-size: 19px;
+            letter-spacing: -.035em;
+        }
+
+        p, li {
+            color: #48544d;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        p { margin: 9px 0; }
+        ul { margin: 9px 0; padding-left: 22px; }
+        li + li { margin-top: 5px; }
+        strong { color: var(--ink); }
+
+        .contact {
+            margin-top: 34px;
+            padding-top: 21px;
+            border-top: 1px solid var(--line);
+        }
+
+        .contact h2 { margin-top: 0; }
+
+        footer {
+            padding: 23px 10px;
+            color: var(--muted);
+            font-size: 12px;
+            text-align: center;
+        }
+
+        footer a { color: inherit; text-decoration: none; }
+        footer a:hover { color: var(--green); }
+
+        @media (max-width: 520px) {
+            .page { width: min(100% - 28px, 800px); margin: 26px auto; }
+            main { margin-top: 21px; border-radius: 19px; }
+        }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Privacy Policy</h1>
-    </header>
-    <main>
-		<h5>ScanMaster app provides basic Scan and generate barcode and QR code functions</h5>
-		<h5>ScanMaster app does not need and will not collect any user information</h5>
-		<h5>ScanMaster app will not share user information with any organizations and individuals</h5>
-		
-    </main>
+    <div class="page">
+        <a class="brand" href="../" aria-label="Snowball Apps home">
+            <span class="brand-mark" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M12 3v18M4.2 7.5l15.6 9M4.2 16.5l15.6-9M8.8 4.8 12 7l3.2-2.2M8.8 19.2 12 17l3.2 2.2M4.5 11l2.8 1-2.8 1M19.5 11l-2.8 1 2.8 1" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </span>
+            Snowball Apps
+        </a>
 
-    <footer>
-        
-    </footer>
+        <main>
+            <p class="eyebrow">Privacy · ScanMaster</p>
+            <h1>Privacy Policy</h1>
+            <p class="updated">Effective date: October 9, 2026</p>
+
+            <p class="intro">ScanMaster lets you scan and create QR codes and barcodes. We do not require an account, and we do not collect or upload the QR code or barcode contents you scan or create. This policy explains how the app and its advertising and analytics providers handle information.</p>
+
+            <h2>1. Information processed by ScanMaster</h2>
+            <p><strong>Scanned and generated codes:</strong> ScanMaster processes QR code and barcode content on your device to provide scanning and generation features. This content is not sent to Snowball's servers or shared with us. We do not operate a server that stores code contents.</p>
+            <p><strong>Camera access:</strong> The app requests camera access when you use the scanning feature. Camera access is used to read codes. ScanMaster does not upload camera frames or scan results to our servers.</p>
+            <p><strong>Information you provide:</strong> You do not need to create an account or provide your name, email address, or other personal details to use the app.</p>
+
+            <h2>2. Advertising, analytics, and third-party services</h2>
+            <p><strong>Google AdMob:</strong> ScanMaster uses AdMob to display ads. AdMob and its partners may automatically collect or receive information from the app and device to provide, measure, and protect advertising services. Depending on your device, settings, location, and consent choices, this may include:</p>
+            <ul>
+                <li>IP address and general location inferred from it;</li>
+                <li>device and app information, such as device identifiers, operating system, and app version;</li>
+                <li>advertising identifiers, where available and permitted;</li>
+                <li>ad requests, impressions, interactions, and related diagnostics or fraud-prevention signals.</li>
+            </ul>
+            <p><strong>Google Firebase Analytics:</strong> We use Firebase Analytics to understand how ScanMaster is used and to improve the app's performance and features. Firebase may automatically collect app usage and interaction events, app instance identifiers, device and app information (such as device model, operating system, and app version), and IP address or approximate location derived from it. Depending on the app configuration, device settings, and applicable consent choices, advertising identifiers or other identifiers may also be processed. Analytics information is sent to Google for processing on our behalf and is handled under Google's terms and privacy practices. We do not use Firebase Analytics to collect or analyze the contents of QR codes or barcodes you scan or create.</p>
+            <p>AdMob and Firebase are Google services. Information handled by these services is subject to Google's privacy terms. For details, see <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google's Privacy Policy</a>, <a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener noreferrer">Firebase privacy and security</a>, and <a href="https://support.google.com/admob/answer/6128543" target="_blank" rel="noopener noreferrer">how Google uses information from apps that use its services</a>.</p>
+
+            <h2>3. How information is used and shared</h2>
+            <p>We use camera access and code contents only to provide the scanning and generation features you request. We do not sell your personal information. We do not share scan contents with organizations or individuals, and scan contents are not sent to AdMob or Firebase Analytics. Google processes advertising and analytics information to provide the services described above and as directed by our app configuration; Google's handling is subject to its privacy terms.</p>
+
+            <h2>4. Data storage and retention</h2>
+            <p>Snowball does not store scanned or generated code contents on its servers. Code contents are processed on your device. Google retains advertising and analytics information according to its service configuration and retention practices. You can manage or remove local app data through your device settings by clearing ScanMaster's app storage or uninstalling the app. For information held by Google, refer to Google's privacy resources and account or device controls where available.</p>
+
+            <h2>5. Your choices</h2>
+            <ul>
+                <li>You can deny or revoke camera permission in your device settings. Scanning with the camera will not be available without this permission; other features may remain available.</li>
+                <li>You can manage advertising ID and ad personalization settings through your Android device settings. Where required, ad consent choices are presented or managed in accordance with applicable requirements.</li>
+                <li>You may clear local app data or uninstall ScanMaster to remove data stored by the app on your device.</li>
+            </ul>
+
+            <h2>6. Children's privacy</h2>
+            <p>ScanMaster does not knowingly collect personal information directly from children. Ad delivery and data practices are subject to the app's declared audience and applicable requirements. Parents or guardians who have privacy questions may contact us using the details below.</p>
+
+            <h2>7. Security</h2>
+            <p>We take reasonable steps to protect information handled by ScanMaster. No method of electronic storage or transmission is completely secure. Google is responsible for the security of information it processes for its advertising services under its applicable terms.</p>
+
+            <h2>8. Changes to this policy</h2>
+            <p>We may update this Privacy Policy when the app or its data practices change. We will post the updated policy on this page and revise the effective date above. Please review it periodically.</p>
+
+            <section class="contact" aria-labelledby="contact-title">
+                <h2 id="contact-title">9. Contact us</h2>
+                <p>If you have questions or requests about this Privacy Policy, contact Snowball at <a href="mailto:fashionnonce@gmail.com">fashionnonce@gmail.com</a>.</p>
+            </section>
+        </main>
+
+        <footer>
+            <a href="../">Snowball Apps</a> · © 2026 Snowball
+        </footer>
+    </div>
 </body>
 </html>
