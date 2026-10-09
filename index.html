@@ -1,26 +1,535 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>SnowBallApps</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f7f8f4">
+    <meta name="description" content="Snowball Apps creates simple, useful, and delightful mobile apps. Explore weather, scanning, games, and VPN apps.">
+    <title>Snowball Apps — Thoughtful apps for everyday life</title>
     <style>
-        /*  CSS  */
+        :root {
+            color-scheme: light;
+            --ink: #18241f;
+            --muted: #65716b;
+            --paper: #f7f8f4;
+            --surface: #fff;
+            --line: #e7eae3;
+            --green: #356c4c;
+            --green-dark: #28563b;
+            --lime: #d9f27b;
+            --shadow: 0 18px 55px rgba(36, 54, 41, .08);
+        }
+
+        * { box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            margin: 0;
+            background: var(--paper);
+            color: var(--ink);
+            font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a { color: inherit; }
+
+        .wrap {
+            width: min(1120px, calc(100% - 48px));
+            margin-inline: auto;
+        }
+
+        .topbar {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 82px;
+            border-bottom: 1px solid rgba(24, 36, 31, .08);
+        }
+
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 11px;
+            text-decoration: none;
+            font-size: 17px;
+            font-weight: 750;
+            letter-spacing: -.04em;
+        }
+
+        .brand-mark {
+            display: grid;
+            width: 34px;
+            height: 34px;
+            place-items: center;
+            border-radius: 12px;
+            background: var(--green);
+            color: white;
+        }
+
+        .brand-mark svg { width: 21px; height: 21px; }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+            color: var(--muted);
+            font-size: 14px;
+            font-weight: 550;
+        }
+
+        .nav a { text-decoration: none; }
+        .nav a:hover { color: var(--green); }
+
+        .nav .contact-link {
+            padding: 10px 16px;
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            color: var(--ink);
+            background: var(--surface);
+        }
+
+        .hero {
+            position: relative;
+            display: grid;
+            grid-template-columns: 1.1fr .9fr;
+            align-items: center;
+            gap: 46px;
+            min-height: 490px;
+            padding-block: 66px 78px;
+        }
+
+        .hero-copy { position: relative; z-index: 1; }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            margin: 0 0 23px;
+            color: var(--green);
+            font-size: 12px;
+            font-weight: 750;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+        }
+
+        .eyebrow::before {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #8abf67;
+            content: "";
+        }
+
+        h1 {
+            max-width: 620px;
+            margin: 0;
+            font-size: clamp(46px, 6.7vw, 76px);
+            font-weight: 720;
+            letter-spacing: -.075em;
+            line-height: 1.08;
+        }
+
+        h1 span { color: var(--green); }
+
+        .hero-description {
+            max-width: 470px;
+            margin: 22px 0 30px;
+            color: var(--muted);
+            font-size: 17px;
+            line-height: 1.8;
+        }
+
+        .button-row { display: flex; flex-wrap: wrap; gap: 12px; }
+
+        .button {
+            display: inline-flex;
+            min-height: 48px;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            padding: 0 20px;
+            border: 1px solid transparent;
+            border-radius: 999px;
+            font-size: 14px;
+            font-weight: 650;
+            text-decoration: none;
+            transition: transform .2s ease, background .2s ease;
+        }
+
+        .button:hover { transform: translateY(-2px); }
+        .button-primary { background: var(--green); color: white; }
+        .button-primary:hover { background: var(--green-dark); }
+        .button-secondary { border-color: var(--line); background: white; }
+        .button svg { width: 16px; height: 16px; }
+
+        .hero-art {
+            position: relative;
+            display: grid;
+            min-height: 330px;
+            place-items: center;
+        }
+
+        .art-orbit {
+            position: absolute;
+            width: min(350px, 90%);
+            aspect-ratio: 1;
+            border: 1px solid #e1e8d6;
+            border-radius: 50%;
+        }
+
+        .art-orbit::before,
+        .art-orbit::after {
+            position: absolute;
+            border-radius: 50%;
+            content: "";
+        }
+
+        .art-orbit::before {
+            inset: 28px;
+            border: 1px dashed #d5dfc9;
+        }
+
+        .art-orbit::after {
+            top: 22px;
+            right: 51px;
+            width: 13px;
+            height: 13px;
+            background: var(--lime);
+            box-shadow: -278px 196px 0 #98c99a;
+        }
+
+        .app-stack {
+            position: relative;
+            display: grid;
+            width: 272px;
+            height: 248px;
+            place-items: center;
+        }
+
+        .floating-icon {
+            position: absolute;
+            display: grid;
+            width: 79px;
+            height: 79px;
+            place-items: center;
+            border: 1px solid rgba(24, 36, 31, .06);
+            border-radius: 24px;
+            background: white;
+            box-shadow: var(--shadow);
+            font-size: 35px;
+        }
+
+        .floating-icon.weather { top: 0; left: 5px; transform: rotate(-9deg); }
+        .floating-icon.scan { top: 15px; right: 0; transform: rotate(8deg); }
+        .floating-icon.games { bottom: 5px; left: 18px; transform: rotate(7deg); }
+        .floating-icon.vpn { right: 13px; bottom: 0; transform: rotate(-8deg); }
+
+        .center-badge {
+            position: relative;
+            display: grid;
+            width: 112px;
+            height: 112px;
+            place-items: center;
+            border: 8px solid var(--paper);
+            border-radius: 36px;
+            background: var(--green);
+            color: white;
+            box-shadow: 0 18px 40px rgba(53, 108, 76, .23);
+        }
+
+        .center-badge svg { width: 52px; height: 52px; }
+
+        .apps-section { padding-block: 30px 94px; }
+
+        .section-heading {
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+            gap: 24px;
+            margin-bottom: 28px;
+        }
+
+        .section-kicker {
+            margin: 0 0 9px;
+            color: var(--green);
+            font-size: 12px;
+            font-weight: 750;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+        }
+
+        h2 {
+            margin: 0;
+            font-size: clamp(30px, 4vw, 42px);
+            font-weight: 700;
+            letter-spacing: -.055em;
+        }
+
+        .section-note {
+            max-width: 340px;
+            margin: 0 0 4px;
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .app-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .app-card {
+            display: flex;
+            min-height: 302px;
+            flex-direction: column;
+            padding: 22px;
+            border: 1px solid var(--line);
+            border-radius: 22px;
+            background: var(--surface);
+            box-shadow: 0 5px 20px rgba(36, 54, 41, .025);
+            transition: transform .22s ease, box-shadow .22s ease;
+        }
+
+        .app-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .app-icon {
+            display: grid;
+            width: 56px;
+            height: 56px;
+            place-items: center;
+            border-radius: 18px;
+            font-size: 27px;
+        }
+
+        .icon-weather { background: #e6f4e5; }
+        .icon-scan { background: #e7edff; }
+        .icon-games { background: #fff0d9; }
+        .icon-vpn { background: #e7f3f1; }
+
+        .app-card h3 {
+            margin: 20px 0 7px;
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: -.035em;
+        }
+
+        .app-subtitle {
+            margin: 0 0 11px;
+            color: var(--green);
+            font-size: 12px;
+            font-weight: 650;
+        }
+
+        .app-description {
+            margin: 0;
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        .app-links {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-top: auto;
+            padding-top: 22px;
+            font-size: 12px;
+            font-weight: 650;
+        }
+
+        .app-links a { text-decoration: none; }
+        .app-links a:first-child { color: var(--green); }
+        .app-links a:hover { text-decoration: underline; }
+        .app-links .policy-link { color: var(--muted); }
+
+        .coming-soon {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+            margin-top: 22px;
+            padding: 22px 26px;
+            border: 1px dashed #ccd5c7;
+            border-radius: 20px;
+            background: #f2f5ec;
+        }
+
+        .coming-soon p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.6; }
+        .coming-soon strong { display: block; margin-bottom: 3px; color: var(--ink); font-size: 15px; }
+        .coming-soon a { flex: 0 0 auto; color: var(--green); font-size: 13px; font-weight: 700; text-decoration: none; }
+
+        footer {
+            border-top: 1px solid var(--line);
+            background: #f1f3ed;
+        }
+
+        .footer-inner {
+            display: flex;
+            min-height: 100px;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .footer-brand { color: var(--ink); font-size: 14px; font-weight: 750; }
+        .footer-inner a { text-decoration: none; }
+        .footer-inner a:hover { color: var(--green); }
+
+        @media (max-width: 900px) {
+            .hero { grid-template-columns: 1fr .75fr; gap: 10px; min-height: 430px; }
+            .app-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .app-card { min-height: 276px; }
+        }
+
+        @media (max-width: 640px) {
+            .wrap { width: min(100% - 36px, 460px); }
+            .topbar { min-height: 70px; }
+            .nav { gap: 16px; font-size: 13px; }
+            .nav .contact-link { padding: 9px 13px; }
+            .hero { display: block; padding-block: 58px 35px; }
+            h1 { font-size: clamp(44px, 13vw, 62px); }
+            .hero-description { font-size: 15px; }
+            .hero-art { min-height: 285px; margin-top: 20px; }
+            .art-orbit { width: 280px; }
+            .app-stack { transform: scale(.88); }
+            .apps-section { padding-block: 26px 65px; }
+            .section-heading { display: block; }
+            .section-note { margin-top: 12px; }
+            .app-grid { gap: 11px; }
+            .app-card { min-height: 294px; padding: 16px; border-radius: 18px; }
+            .app-card h3 { font-size: 16px; }
+            .app-links { flex-wrap: wrap; gap: 8px 12px; }
+            .coming-soon { align-items: flex-start; flex-direction: column; padding: 20px; }
+            .footer-inner { min-height: 110px; align-items: flex-start; flex-direction: column; justify-content: center; gap: 10px; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after { transition-duration: .01ms !important; }
+        }
     </style>
 </head>
-
 <body>
-    <header>
-        <h1>MyApps</h1>
+    <header class="wrap topbar">
+        <a class="brand" href="#" aria-label="Snowball Apps home">
+            <span class="brand-mark" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M12 3v18M4.2 7.5l15.6 9M4.2 16.5l15.6-9M8.8 4.8 12 7l3.2-2.2M8.8 19.2 12 17l3.2 2.2M4.5 11l2.8 1-2.8 1M19.5 11l-2.8 1 2.8 1" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </span>
+            <span>Snowball Apps</span>
+        </a>
+        <nav class="nav" aria-label="Main navigation">
+            <a href="#apps">Apps</a>
+            <a class="contact-link" href="mailto:fashionnonce@gmail.com">Contact</a>
+        </nav>
     </header>
-    <main>
-        <h5>This is my Apps Site, is buildding</h5>
 
+    <main>
+        <section class="wrap hero" aria-labelledby="hero-title">
+            <div class="hero-copy">
+                <p class="eyebrow">Independently made · Always creating</p>
+                <h1 id="hero-title">Made for life.<br><span>Built to be useful.</span></h1>
+                <p class="hero-description">We're Snowball. We create simple, useful, and delightful mobile apps—small solutions that make everyday moments a little easier.</p>
+                <div class="button-row">
+                    <a class="button button-primary" href="#apps">
+                        Explore our apps
+                        <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10h12m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </a>
+                    <a class="button button-secondary" href="mailto:fashionnonce@gmail.com">Get in touch</a>
+                </div>
+            </div>
+            <div class="hero-art" aria-hidden="true">
+                <div class="art-orbit"></div>
+                <div class="app-stack">
+                    <div class="floating-icon weather">🌤️</div>
+                    <div class="floating-icon scan">▦</div>
+                    <div class="floating-icon games">🎮</div>
+                    <div class="floating-icon vpn">🛡️</div>
+                    <div class="center-badge">
+                        <svg viewBox="0 0 52 52" fill="none"><path d="M26 5v42M8 15.5l36 21M8 36.5l36-21M18 9l8 5 8-5M18 43l8-5 8 5M9 23l7 3-7 3M43 23l-7 3 7 3" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="wrap apps-section" id="apps" aria-labelledby="apps-title">
+            <div class="section-heading">
+                <div>
+                    <p class="section-kicker">A few of our apps · 01—04</p>
+                    <h2 id="apps-title">A little something for every day</h2>
+                </div>
+                <p class="section-note">From the forecast to a quick scan, a little fun, or a more flexible connection—each app starts with an everyday need.</p>
+            </div>
+
+            <div class="app-grid">
+                <article class="app-card">
+                    <div class="app-icon icon-weather" aria-hidden="true">🌤️</div>
+                    <h3>Weather Life</h3>
+                    <p class="app-subtitle">Weather · Everyday insights</p>
+                    <p class="app-description">Check the forecast for your city and get the weather insights you need to plan your day.</p>
+                    <div class="app-links">
+                        <a href="https://play.google.com/store/search?q=Weather%20Life&c=apps" target="_blank" rel="noopener noreferrer">Find it on Google Play ↗</a>
+                        <a class="policy-link" href="weather/">Privacy policy</a>
+                    </div>
+                </article>
+
+                <article class="app-card">
+                    <div class="app-icon icon-scan" aria-hidden="true">▦</div>
+                    <h3>ScanMaster</h3>
+                    <p class="app-subtitle">QR code · Barcode tools</p>
+                    <p class="app-description">Quickly scan QR codes and barcodes, or easily create your own.</p>
+                    <div class="app-links">
+                        <a href="https://play.google.com/store/search?q=ScanMaster&c=apps" target="_blank" rel="noopener noreferrer">Find it on Google Play ↗</a>
+                        <a class="policy-link" href="scanmaster/">Privacy policy</a>
+                    </div>
+                </article>
+
+                <article class="app-card">
+                    <div class="app-icon icon-games" aria-hidden="true">🎮</div>
+                    <h3>Poly Games</h3>
+                    <p class="app-subtitle">Mini Game Box · Play anywhere</p>
+                    <p class="app-description">A pocket-sized collection of mini games for a little fun whenever you have a moment.</p>
+                    <div class="app-links">
+                        <a href="https://play.google.com/store/search?q=Poly%20Games%20Mini%20Game%20Box&c=apps" target="_blank" rel="noopener noreferrer">Find it on Google Play ↗</a>
+                        <a class="policy-link" href="gamebox/">Privacy policy</a>
+                    </div>
+                </article>
+
+                <article class="app-card">
+                    <div class="app-icon icon-vpn" aria-hidden="true">🛡️</div>
+                    <h3>SVPN</h3>
+                    <p class="app-subtitle">Fast and secure VPN proxy</p>
+                    <p class="app-description">An easy-to-use VPN connection tool that gives you more options for getting online.</p>
+                    <div class="app-links">
+                        <a href="https://play.google.com/store/search?q=SVPN%20Fast%20and%20Secure%20VPN%20Proxy&c=apps" target="_blank" rel="noopener noreferrer">Find it on Google Play ↗</a>
+                        <a class="policy-link" href="svpn/">Privacy policy</a>
+                    </div>
+                </article>
+            </div>
+
+            <div class="coming-soon">
+                <p><strong>More good ideas are on the way.</strong> We're always working on new little apps. Stay tuned for what's next.</p>
+                <a href="mailto:fashionnonce@gmail.com">Share an idea →</a>
+            </div>
+        </section>
     </main>
 
     <footer>
-
+        <div class="wrap footer-inner">
+            <a class="footer-brand" href="#">Snowball Apps</a>
+            <span>Thoughtful apps for everyday life · © 2026 Snowball</span>
+            <a href="mailto:fashionnonce@gmail.com">fashionnonce@gmail.com</a>
+        </div>
     </footer>
 </body>
-
 </html>
